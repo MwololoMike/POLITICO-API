@@ -61,5 +61,26 @@ def api_add_office():
     }), 201)
 
 
+@app.route('/parties', methods=['POST'])
+def api_add_party():
+    data = request.get_json()
+    name = data["name"]
+    party_id = len(party_list)+1
+
+    new_party = {
+        "name": name,
+        "party_id": party_id
+
+    }
+
+    office_list.append(new_party)
+    return make_response(jsonify({
+        "message": "Party created successfully.",
+        "status": "201",
+        "parties": new_party['name'],
+        "party_id": party_id
+    }), 201)
+
+
 if __name__ == "__main__":
     app.run()
