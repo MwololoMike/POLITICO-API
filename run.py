@@ -29,5 +29,14 @@ def offices():
     }), 200)
 
 
+@app.route('/parties/<party-id>', methods=['GET'])
+def parties():
+    return make_response(jsonify({
+        "status": "200",
+        "parties": party_list
+    }), 200)
+
+
+
 if __name__ == "__main__":
     app.run()
