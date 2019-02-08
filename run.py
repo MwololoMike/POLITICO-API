@@ -27,15 +27,9 @@ def api_office(office_id):
     try:
         office = office_list[int(office_id) - 1]
         if office:
-            return make_response(jsonify({
-                "status": "200",
-                "office": [office]
-            }), 200)
+            return make_response(jsonify({"status": "200", "office": [office]}), 200)
         else:
-            return make_response(jsonify({
-                "message": "Invalid Request",
-                "status": "400"
-            }), 400)
+            return make_response(jsonify({"message": "Invalid Request", "status": "400"}), 400)
 
     except IndexError:
         return make_response(jsonify({
@@ -49,20 +43,11 @@ def api_party(party_id):
     try:
         party = party_list[int(party_id) - 1]
         if party:
-            return make_response(jsonify({
-                "status": "200",
-                "party": [party]
-            }), 200)
+            return make_response(jsonify({"status": "200", "party": [party]}), 200)
         else:
-            return make_response(jsonify({
-                "message": "Invalid Request",
-                "status": "400"
-            }), 400)
+            return make_response(jsonify({"message": "Invalid Request", "status": "400"}), 400)
     except IndexError:
-        return make_response(jsonify({
-            "message": "Index Error",
-            "status": "400"
-        }), 400)
+        return make_response(jsonify({"message": "Index Error", "status": "400"}), 400)
 
 
 @app.route('/offices', methods=['POST'])
@@ -75,11 +60,7 @@ def api_add_office():
         office_id = len(office_list) + 1
     office_type = data['type']
 
-    new_office = {
-        "name": office_name,
-        "office_id": office_id,
-        "type": office_type
-    }
+    new_office = {"name": office_name, "office_id": office_id, "type": office_type}
 
     office_list.append(new_office)
 
@@ -123,5 +104,19 @@ def api_edit_party(party_id):
     return make_response(jsonify({"message": "Error", "status": "404"}), 404)
 
 
+@app.route('/parties/<party_id>', methods=['DELETE'])
+def api_delete_party(party_id):
+    try:
+        party = [party for party in party_list if party['party_id'] == party_id]
+        if len(party_list) == 0:
+            return make_response(jsonify({"message": "Failed to delete.", "status": "404"}), 404)
+        else:
+            party_list.remove(party[0])
+            return make_response(jsonify({"message": "Successfully Deleted.", "status": "202"}), 202)
+    except IndexError:
+        return make_response(jsonify({"status": "400", "message": "Index Error."}), 400)
+
+
 if __name__ == "__main__":
     app.run()
+
