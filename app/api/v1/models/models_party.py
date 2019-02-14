@@ -11,7 +11,8 @@ class Party:
         return self.party_list
 
     def get_party(self):
-        retrieve_party = party_list[self.party_id - 1]
+        party_id = int(self.party_id)
+        retrieve_party = party_list[party_id - 1]
         return retrieve_party
 
     def add_party(self):
@@ -27,20 +28,17 @@ class Party:
             party_list.append(new_party)
             return new_party
 
-
-def edit_party(self):
-    party_id = self.party_id
-    new_party_name = self.data["name"]
-    for party in party_list:
-        if party_id == self.party_id:
-            party["name"] = new_party_name
-
-        return new_party_name
-
-
-def delete_party(self):
-    if len(party_list) > 0:
+    def edit_party(self):
+        party_id = self.party_id
+        new_party_name = self.data["name"]
         for party in party_list:
-            if party['party_id'] == self.party_id:
-                party_list.remove(party)
-            return "Success"
+            if party_id == self.party_id:
+                party["name"] = new_party_name
+            return new_party_name
+
+    def delete_party(self):
+        if len(party_list) > 0:
+            for party in party_list:
+                if party['party_id'] == int(self.party_id):
+                    party_list.remove(party)
+                    return "Success"

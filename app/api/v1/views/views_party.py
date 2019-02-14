@@ -34,7 +34,7 @@ def endpoint_edit_party(party_id):
     new_party_name = Party(data).edit_party()
     if new_party_name:
         return make_response(jsonify({"message": "Party name updated successfully", "status": "202",
-                                      "data": [{"party_id": party_id, "name": new_party_name['name']}]}), 202)
+                                      "data": [{"party_id": party_id, "name": new_party_name}]}), 202)
     else:
         return make_response(jsonify({"message": "Unable to update party.", "status": "404"}), 404)
 
@@ -42,7 +42,7 @@ def endpoint_edit_party(party_id):
 @politico.route('/parties/<party_id>', methods=['GET'])
 def endpoint_party(party_id):
     try:
-        party = Party(party_id).get_party()
+        party = Party(party_id=party_id).get_party()
         if party:
             return make_response(jsonify({"status": "200", "party": [party]}), 200)
         else:
@@ -54,7 +54,7 @@ def endpoint_party(party_id):
 @politico.route('/parties/<party_id>', methods=['DELETE'])
 def endpoint_delete_party(party_id):
     try:
-        success = Party(party_id).delete_party()
+        success = Party(party_id=party_id).delete_party()
         if success:
             return make_response(jsonify({"message": "Successfully Deleted.", "status": "202"}), 202)
         else:

@@ -1,4 +1,5 @@
 # POLITICO-API
+![Travis](https://travis-ci.org/MwololoMike/POLITICO-API.svg?branch=develop)
 ### Endpoints
 
 |   ENDPOINT  | METHOD | FUNCTIONALITY |
