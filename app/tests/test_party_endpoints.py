@@ -46,14 +46,13 @@ class TestPartiesEndpoints(TestCase):
         self.assertTrue(response.status_code == 404)
         self.assertTrue(response.json['message'] == "Unable to update party.")
 
-    def test_get_all_parties_successfully(self):
+    def test_get_all_parties_success(self):
         self.politico_client.post("/parties", data=json.dumps({
             "name": "party_name",
             "logoUrl": "logo_url",
             "hqAddress": "party_address"
         }))
-        response = self.politico_client.get("/parties", data=json.dumps({
-        }))
+        response = self.politico_client.get("/parties")
         self.assertTrue(response.status_code == 200)
 
     def test_get_all_parties_failed(self):
@@ -62,11 +61,10 @@ class TestPartiesEndpoints(TestCase):
             "logoUrl": "logo_url",
             "hqAddress": "party_address"
         }))
-        response = self.politico_client.get("/partiies", data=json.dumps({
-        }))
+        response = self.politico_client.get("/partiies")
         self.assertTrue(response.status_code == 404)
 
-    def test_admin_delete_party_successfully(self):
+    def test_admin_delete_party_success(self):
         self.politico_client.post("/parties", data=json.dumps({
             "name": "party_name",
             "logoUrl": "logo_url",

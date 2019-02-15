@@ -20,8 +20,10 @@ class Office:
             self.office_id = 1
         else:
             self.office_id = len(office_list) + 1
+
         office_name = self.data["name"]
         office_type = self.data["type"]
+
         if self.data:
             new_office = {"name": office_name, "office_id": self.office_id, "type": office_type}
             office_list.append(new_office)
